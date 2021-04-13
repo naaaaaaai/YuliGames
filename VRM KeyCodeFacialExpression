@@ -1,0 +1,145 @@
+//https://sesleria.hatenadiary.jp/entry/2019/05/02/164638 せすれりあ様のコードを参考にしております。
+//指定したKeyCodeによって表情が変化するコードです。
+
+
+using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+using VRM;
+
+//初めはUの口にするために作ったコードのため名前がspeakUになってます。ここから派生して色んな口の動きが足された結果出来たコードです。
+public class SpeakU : MonoBehaviour
+{
+
+	private VRMBlendShapeProxy proxy;
+
+
+	// Use this for initialization
+	void Start()
+	{
+		proxy = this.GetComponent<VRMBlendShapeProxy>();
+	}
+
+	// Update is called once per frame
+	void Update()
+	{
+        
+
+			if (proxy == null)
+			{
+				Debug.Log("null");
+				proxy = GetComponent<VRMBlendShapeProxy>();
+			}
+			else
+			{
+      /*
+      *KeyCodeの部分やproxy.SetValue中は希望するKeyCodeやBlendShapeを記載
+      *標準のBlendShapeを使用する場合はBlendShapePreset.Aのように「.〇〇」の○に値を挿入
+      *自作のBlendShapeの場合は"Fun_A"のように"〇〇"にて値を挿入しました。
+      *
+      */
+			if (Input.GetKey(KeyCode.T))
+			{
+				ResetBlendShape();
+				proxy.SetValue(BlendShapePreset.A, 1.0f);
+			}
+			if (Input.GetKey(KeyCode.I))
+				{
+    				ResetBlendShape();
+    				proxy.SetValue(BlendShapePreset.I, 1.0f);
+				}
+			if (Input.GetKey(KeyCode.U))
+			{
+				ResetBlendShape();
+				proxy.SetValue(BlendShapePreset.U, 1.0f);
+
+
+			}
+
+			if (Input.GetKey(KeyCode.Y))
+				{
+    				ResetBlendShape();
+    				proxy.SetValue(BlendShapePreset.E, 1.0f);
+				}
+			}
+		    if (Input.GetKey(KeyCode.O))
+		    {
+			    ResetBlendShape();
+			    proxy.SetValue(BlendShapePreset.O, 1.0f);
+		    }
+		    if (Input.GetKey(KeyCode.G))
+		    {
+			    ResetBlendShape();
+			    proxy.SetValue("Fun_A", 1.0f);
+
+		    }
+		    if (Input.GetKey(KeyCode.H))
+		    {
+			    ResetBlendShape();
+			    proxy.SetValue("Fun_E", 1.0f);
+
+		    }  
+		    if (Input.GetKey(KeyCode.J))
+		    {
+			    ResetBlendShape();
+			    proxy.SetValue("Fun_U", 1.0f);
+
+		    }
+		    if (Input.GetKey(KeyCode.K))
+		    {
+			    ResetBlendShape();
+			    proxy.SetValue("Fun_I", 1.0f);
+
+		    }
+		    if (Input.GetKey(KeyCode.L))
+		    {
+			    ResetBlendShape();
+			    proxy.SetValue("Fun_O", 1.0f);
+		    }
+
+            if (Input.GetKey(KeyCode.Minus))
+			{
+				ResetBlendShape();
+				proxy.SetValue("Fun_Wink_R", 1.0f);
+
+			}
+		    if (Input.GetKey(KeyCode.Caret))
+		    {
+			    ResetBlendShape();
+			    proxy.SetValue("Fun_Wink_L", 1.0f);
+
+		    }
+//上記コードだと押したKeyCodeの表情のままなので手動で元の顔に戻せるように指定したKeyCodeを押すと顔が初期化されるコードを記述しました。
+//技術があればこの処理はいらないかもしれませんが自分自身では今これが現状です。
+
+		if (Input.GetKey(KeyCode.P))
+		    {
+			ResetBlendShape();
+		
+		    }
+
+	}
+
+	//表情を初期化
+  //使用したResetBlendShapeを下記に記載します。
+	public void ResetBlendShape()
+	{
+
+		proxy.SetValue(BlendShapePreset.A, 0.0f);
+		proxy.SetValue(BlendShapePreset.I, 0.0f);
+		proxy.SetValue(BlendShapePreset.U, 0.0f);
+		proxy.SetValue(BlendShapePreset.E, 0.0f);
+		proxy.SetValue(BlendShapePreset.O, 0.0f);
+		proxy.SetValue("Fun_A", 0.0f);
+		proxy.SetValue("Fun_I", 0.0f);
+		proxy.SetValue("Fun_U", 0.0f);
+		proxy.SetValue("Fun_E", 0.0f);
+		proxy.SetValue("Fun_O", 0.0f);
+		proxy.SetValue("Fun_Wink_R", 0.0f);
+		proxy.SetValue("Fun_Wink_L", 0.0f);
+	}
+
+}
+
+
+
